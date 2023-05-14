@@ -22,7 +22,7 @@
         $conn = odbc_connect( $connection_string, $user, $pass );
         
         // Create query and execute query
-        $sql = "INSERT INTO monitoring (temperatur, idMesin, lokasi) VALUES ('" . $temperatur . "', '" . $idMesin . "', '" . $lokasi . "')"; // Query
+        $sql = "INSERT INTO monitoring (waktu, temperatur, idMesin, lokasi) VALUES (current_timestamp, '" . $temperatur . "', '" . $idMesin . "', '" . $lokasi . "')"; // Query
         $result = odbc_exec(conn,sql);
         
         $close = odbc_close_all(); // Close ODBC connection
