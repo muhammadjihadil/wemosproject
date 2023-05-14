@@ -31,11 +31,12 @@
             $result1 = odbc_exec($conn, $sql1); // Execution of query 1
 
             // Make an array
-            $database[100-$i][0] = odbc_result($result1,1);
-            $database[100-$i][1] = odbc_result($result1,3);
+            $database[100-$i][0] = odbc_result($result1,1); // Nomor Data
+            $database[100-$i][1] = odbc_result($result1,3); // Temperatur
         }
 
         // Ploting data from database
+	// X axis as Nomor Data, Y axis as Temperatur
         $dataPoints = array(
             array("x" => $database[0][0], "y" => $database[0][1]),
             array("x" => $database[1][0], "y" => $database[1][1]),
@@ -144,7 +145,7 @@
         $result2 = odbc_exec($conn, $sql2); 					// Execution of query 2
         $row_reading_time2 = odbc_result($result2,2); 				// Last timestamp data
         $row_temperature2 = odbc_result($result2,3); 				// Last temperature data
-        $row_location = odbc_result($result2,5);				//Location of sensor
+        $row_location = odbc_result($result2,5);				// Location of sensor
     ?>
 
     <!-- Positioning of chart -->
