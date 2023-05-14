@@ -1,0 +1,221 @@
+<!--Created by: Muhammad Jihadil (jihadil003@gmail.com)
+    This code is nested file which include multiple language: HTML, PHP, SQL, and JavaScript
+
+    It will use ODBC to login to database and execute query 
+    After logining to database, this code will pull data from database using SQL
+    PHP will be used to make an array
+    The data will be saved in an array and plotted with JavaScript
+-->
+
+<!-- Publication: https://drive.google.com/file/d/1366n3-IRN7HiNp7mXm9MVnSAszm46DyY/view?usp=share_link -->
+
+<!DOCTYPE HTML>
+<html><head>
+<h2 align="center">Data Pengukuran DHT11</h2>
+    <?php
+        header('Refresh: 10'); //page will refresh every 10 seconds
+        
+        //username and password database
+        $user = 'admin'; 
+        $pass = '12345678';
+
+        //connect to server name 'Jihadil', TCP port: 1344, and  database name 'Sensor_Monitoring'
+        $connection_string = 'DRIVER = {SQL Server};
+                                        SERVER=tcp:Jihadil,1344;
+                                        DATABASE=Sensor_Monitoring';
+        $conn = odbc_connect( $connection_string, $user, $pass ); //conneting via ODBC
+ 
+        //extract data from database
+        for ($i=100; $i>0; $i--){
+            $sql1 = "SELECT * FROM (SELECT TOP ".$i." * FROM monitoring ORDER BY nomorData DESC) cut ORDER BY nomorData ASC"; //query 1
+            $result1 = odbc_exec($conn, $sql1); //execution of query 1
+
+            //make an array
+            $database[100-$i][0] = odbc_result($result1,1);
+            $database[100-$i][1] = odbc_result($result1,3);
+        }
+
+        //ploting data from database
+        $dataPoints = array(
+            array("x" => $database[0][0], "y" => $database[0][1]),
+            array("x" => $database[1][0], "y" => $database[1][1]),
+            array("x" => $database[2][0], "y" => $database[2][1]),
+            array("x" => $database[3][0], "y" => $database[3][1]),
+            array("x" => $database[4][0], "y" => $database[4][1]),
+            array("x" => $database[5][0], "y" => $database[5][1]),
+            array("x" => $database[6][0], "y" => $database[6][1]),
+            array("x" => $database[7][0], "y" => $database[7][1]),
+            array("x" => $database[8][0], "y" => $database[8][1]),
+            array("x" => $database[9][0], "y" => $database[9][1]),
+            array("x" => $database[10][0], "y" => $database[10][1]),
+            array("x" => $database[11][0], "y" => $database[11][1]),
+            array("x" => $database[12][0], "y" => $database[12][1]),
+            array("x" => $database[13][0], "y" => $database[13][1]),
+            array("x" => $database[14][0], "y" => $database[14][1]),
+            array("x" => $database[15][0], "y" => $database[15][1]),
+            array("x" => $database[16][0], "y" => $database[16][1]),
+            array("x" => $database[17][0], "y" => $database[17][1]),
+            array("x" => $database[18][0], "y" => $database[18][1]),
+            array("x" => $database[19][0], "y" => $database[19][1]),
+            array("x" => $database[20][0], "y" => $database[20][1]),
+            array("x" => $database[21][0], "y" => $database[21][1]),
+            array("x" => $database[22][0], "y" => $database[22][1]),
+            array("x" => $database[23][0], "y" => $database[23][1]),
+            array("x" => $database[24][0], "y" => $database[24][1]),
+            array("x" => $database[25][0], "y" => $database[25][1]),
+            array("x" => $database[26][0], "y" => $database[26][1]),
+            array("x" => $database[27][0], "y" => $database[27][1]),
+            array("x" => $database[28][0], "y" => $database[28][1]),
+            array("x" => $database[29][0], "y" => $database[29][1]),
+            array("x" => $database[30][0], "y" => $database[30][1]),
+            array("x" => $database[31][0], "y" => $database[31][1]),
+            array("x" => $database[32][0], "y" => $database[32][1]),
+            array("x" => $database[33][0], "y" => $database[33][1]),
+            array("x" => $database[34][0], "y" => $database[34][1]),
+            array("x" => $database[35][0], "y" => $database[35][1]),
+            array("x" => $database[36][0], "y" => $database[36][1]),
+            array("x" => $database[37][0], "y" => $database[37][1]),
+            array("x" => $database[38][0], "y" => $database[38][1]),
+            array("x" => $database[39][0], "y" => $database[39][1]),
+            array("x" => $database[40][0], "y" => $database[40][1]),
+            array("x" => $database[41][0], "y" => $database[41][1]),
+            array("x" => $database[42][0], "y" => $database[42][1]),
+            array("x" => $database[43][0], "y" => $database[43][1]),
+            array("x" => $database[44][0], "y" => $database[44][1]),
+            array("x" => $database[45][0], "y" => $database[45][1]),
+            array("x" => $database[46][0], "y" => $database[46][1]),
+            array("x" => $database[47][0], "y" => $database[47][1]),
+            array("x" => $database[48][0], "y" => $database[48][1]),
+            array("x" => $database[49][0], "y" => $database[49][1]),
+            array("x" => $database[50][0], "y" => $database[50][1]),
+            array("x" => $database[51][0], "y" => $database[51][1]),
+            array("x" => $database[52][0], "y" => $database[52][1]),
+            array("x" => $database[53][0], "y" => $database[53][1]),
+            array("x" => $database[54][0], "y" => $database[54][1]),
+            array("x" => $database[55][0], "y" => $database[55][1]),
+            array("x" => $database[56][0], "y" => $database[56][1]),
+            array("x" => $database[57][0], "y" => $database[57][1]),
+            array("x" => $database[58][0], "y" => $database[58][1]),
+            array("x" => $database[59][0], "y" => $database[59][1]),
+            array("x" => $database[60][0], "y" => $database[60][1]),
+            array("x" => $database[61][0], "y" => $database[61][1]),
+            array("x" => $database[62][0], "y" => $database[62][1]),
+            array("x" => $database[63][0], "y" => $database[63][1]),
+            array("x" => $database[64][0], "y" => $database[64][1]),
+            array("x" => $database[65][0], "y" => $database[65][1]),
+            array("x" => $database[66][0], "y" => $database[66][1]),
+            array("x" => $database[67][0], "y" => $database[67][1]),
+            array("x" => $database[68][0], "y" => $database[68][1]),
+            array("x" => $database[69][0], "y" => $database[69][1]),
+            array("x" => $database[70][0], "y" => $database[70][1]),
+            array("x" => $database[71][0], "y" => $database[71][1]),
+            array("x" => $database[72][0], "y" => $database[72][1]),
+            array("x" => $database[73][0], "y" => $database[73][1]),
+            array("x" => $database[74][0], "y" => $database[74][1]),
+            array("x" => $database[75][0], "y" => $database[75][1]),
+            array("x" => $database[76][0], "y" => $database[76][1]),
+            array("x" => $database[77][0], "y" => $database[77][1]),
+            array("x" => $database[78][0], "y" => $database[78][1]),
+            array("x" => $database[79][0], "y" => $database[79][1]),
+            array("x" => $database[80][0], "y" => $database[80][1]),
+            array("x" => $database[81][0], "y" => $database[81][1]),
+            array("x" => $database[82][0], "y" => $database[82][1]),
+            array("x" => $database[83][0], "y" => $database[83][1]),
+            array("x" => $database[84][0], "y" => $database[84][1]),
+            array("x" => $database[85][0], "y" => $database[85][1]),
+            array("x" => $database[86][0], "y" => $database[86][1]),
+            array("x" => $database[87][0], "y" => $database[87][1]),
+            array("x" => $database[88][0], "y" => $database[88][1]),
+            array("x" => $database[89][0], "y" => $database[89][1]),
+            array("x" => $database[90][0], "y" => $database[90][1]),
+            array("x" => $database[91][0], "y" => $database[91][1]),
+            array("x" => $database[92][0], "y" => $database[92][1]),
+            array("x" => $database[93][0], "y" => $database[93][1]),
+            array("x" => $database[94][0], "y" => $database[94][1]),
+            array("x" => $database[95][0], "y" => $database[95][1]),
+            array("x" => $database[96][0], "y" => $database[96][1]),
+            array("x" => $database[97][0], "y" => $database[97][1]),
+            array("x" => $database[98][0], "y" => $database[98][1]),
+            array("x" => $database[99][0], "y" => $database[99][1]) 
+        ); 
+
+        //pull last recorded data
+        $sql2 = "SELECT TOP 1 * FROM monitoring ORDER BY nomorData DESC"; //query 2
+        $result2 = odbc_exec($conn, $sql2); //execution of query 2
+        $row_reading_time2 = odbc_result($result2,2); //last timestamp data
+        $row_temperature2 = odbc_result($result2,3); //last temperature data
+        $row_location = odbc_result($result2,5); //location of sensor
+    ?>
+
+    <!-- positioning of chart -->
+    <style>
+        .right {
+            position: absolute;
+            right: 0px;
+            width: 700px;
+            padding: 10px;
+        }
+    </style>
+
+    <!-- script for chart -->
+    <script>
+        window.onload = function () {
+        var chart = new CanvasJS.Chart("chartContainer", {
+            animationEnabled: false,
+            title:{
+                text: "Seratus Data Terakhir" //title of chart
+            },
+            axisX: {
+                title: "Nomor Data", //title of x axis
+            },
+            axisY: {
+                title: "Temperatur (deg. C)", //title of y axis
+                minimum: 20, //minimum display value of y axis
+                maximum: 45, //maximum display value of y axis
+            },
+            data: [{
+                type: "spline",
+                markerSize: 5,
+                dataPoints: <?php 
+                                echo json_encode($dataPoints, JSON_NUMERIC_CHECK); 
+                            ?>
+            }]
+        });
+        chart.render();
+        }
+    </script>
+</head>
+
+<!-- Show last record of the data -->
+<body>
+    <div class="right"><div id="chartContainer" style="height: 370px; width: 100%;"></div></div>
+    <script src="canvasjs.min.js"></script>
+    
+    <!-- style of table of data -->
+    <style>
+        table, th, td {
+        border: 1px solid black;
+        }
+    </style>
+
+    <!-- table's header -->
+    <table cellspacing="5" cellpadding="5" style="width:40%">
+        <tr> 
+            <th>Location</th> 
+            <th>Last Record</th> 
+            <th>Temperature (deg. C)</th>
+        </tr>
+        
+        <!-- table's content -->
+        <tr> 
+            <td><?php echo $row_location ?>
+			</td> 
+			
+            <td><?php echo $row_reading_time2 ?>
+			</td> 
+			
+            <td align="center"><?php echo $row_temperature2 ?>
+            </td> 
+        </tr>
+</body>
+</html>
