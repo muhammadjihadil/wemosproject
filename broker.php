@@ -1,5 +1,9 @@
 <?php
 
+    /* Created by: Muhammad Jihadil (jihadil003@gmail.com)
+     * Publication: https://drive.google.com/file/d/1366n3-IRN7HiNp7mXm9MVnSAszm46DyY/view?usp=share_link
+     */
+
     // Username and password database
     $user = 'admin'; 
     $pass = '12345678';
