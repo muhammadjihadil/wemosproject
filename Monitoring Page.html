@@ -15,27 +15,27 @@
     <?php
         header('Refresh: 10'); //page will refresh every 10 seconds
         
-        //username and password database
+        // Username and password database
         $user = 'admin'; 
         $pass = '12345678';
 
-        //connect to server name 'Jihadil', TCP port: 1344, and  database name 'Sensor_Monitoring'
+        // Connect to server name 'Jihadil', TCP port: 1344, and  database name 'Sensor_Monitoring'
         $connection_string = 'DRIVER = {SQL Server};
                                         SERVER=tcp:Jihadil,1344;
                                         DATABASE=Sensor_Monitoring';
-        $conn = odbc_connect( $connection_string, $user, $pass ); //conneting via ODBC
+        $conn = odbc_connect( $connection_string, $user, $pass );
  
-        //extract data from database
+        // Extract data from database
         for ($i=100; $i>0; $i--){
-            $sql1 = "SELECT * FROM (SELECT TOP ".$i." * FROM monitoring ORDER BY nomorData DESC) cut ORDER BY nomorData ASC"; //query 1
-            $result1 = odbc_exec($conn, $sql1); //execution of query 1
+            $sql1 = "SELECT * FROM (SELECT TOP ".$i." * FROM monitoring ORDER BY nomorData DESC) cut ORDER BY nomorData ASC"; // Query 1
+            $result1 = odbc_exec($conn, $sql1); // Execution of query 1
 
-            //make an array
+            // Make an array
             $database[100-$i][0] = odbc_result($result1,1);
             $database[100-$i][1] = odbc_result($result1,3);
         }
 
-        //ploting data from database
+        // Ploting data from database
         $dataPoints = array(
             array("x" => $database[0][0], "y" => $database[0][1]),
             array("x" => $database[1][0], "y" => $database[1][1]),
@@ -139,15 +139,15 @@
             array("x" => $database[99][0], "y" => $database[99][1]) 
         ); 
 
-        //pull last recorded data
-        $sql2 = "SELECT TOP 1 * FROM monitoring ORDER BY nomorData DESC"; //query 2
-        $result2 = odbc_exec($conn, $sql2); //execution of query 2
-        $row_reading_time2 = odbc_result($result2,2); //last timestamp data
-        $row_temperature2 = odbc_result($result2,3); //last temperature data
-        $row_location = odbc_result($result2,5); //location of sensor
+        // Pull last recorded data
+        $sql2 = "SELECT TOP 1 * FROM monitoring ORDER BY nomorData DESC";	// Query 2
+        $result2 = odbc_exec($conn, $sql2); 					// Execution of query 2
+        $row_reading_time2 = odbc_result($result2,2); 				// Last timestamp data
+        $row_temperature2 = odbc_result($result2,3); 				// Last temperature data
+        $row_location = odbc_result($result2,5);				//Location of sensor
     ?>
 
-    <!-- positioning of chart -->
+    <!-- Positioning of chart -->
     <style>
         .right {
             position: absolute;
@@ -157,21 +157,21 @@
         }
     </style>
 
-    <!-- script for chart -->
+    <!-- Script for chart -->
     <script>
         window.onload = function () {
         var chart = new CanvasJS.Chart("chartContainer", {
             animationEnabled: false,
             title:{
-                text: "Seratus Data Terakhir" //title of chart
+                text: "Seratus Data Terakhir" // Title of chart
             },
             axisX: {
-                title: "Nomor Data", //title of x axis
+                title: "Nomor Data", // Title of x axis
             },
             axisY: {
-                title: "Temperatur (deg. C)", //title of y axis
-                minimum: 20, //minimum display value of y axis
-                maximum: 45, //maximum display value of y axis
+                title: "Temperatur (deg. C)",	// Title of y axis
+                minimum: 20, 			// Minimum display value of y axis
+                maximum: 45, 			// Maximum display value of y axis
             },
             data: [{
                 type: "spline",
@@ -191,14 +191,14 @@
     <div class="right"><div id="chartContainer" style="height: 370px; width: 100%;"></div></div>
     <script src="canvasjs.min.js"></script>
     
-    <!-- style of table of data -->
+    <!-- Style of table of data -->
     <style>
         table, th, td {
         border: 1px solid black;
         }
     </style>
 
-    <!-- table's header -->
+    <!-- Table's header -->
     <table cellspacing="5" cellpadding="5" style="width:40%">
         <tr> 
             <th>Location</th> 
@@ -206,7 +206,7 @@
             <th>Temperature (deg. C)</th>
         </tr>
         
-        <!-- table's content -->
+        <!-- Table's content -->
         <tr> 
             <td><?php echo $row_location ?>
 			</td> 
